@@ -14,9 +14,15 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 
 add_library(lua-poly2tri SHARED ${SOURCE_FILES})
 
+set_target_properties(lua-poly2tri PROPERTIES PREFIX "")
+set_target_properties(lua-poly2tri PROPERTIES OUTPUT_NAME "poly2tri")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -std=c++11")
+
 if (APPLE)
   set(PLATFORM_OPTIONS "-undefined dynamic_lookup")
   set_target_properties(lua-poly2tri PROPERTIES SUFFIX .so)
+elseif(UNIX)
+  set(PLATFORM_OPTIONS "-fpic")
 endif (APPLE)
 
 target_link_libraries(lua-poly2tri ${PLATFORM_OPTIONS} Poly2Tri)

@@ -18,10 +18,10 @@ static const struct luaL_Reg thislib[] = {
 };
 
 extern "C" {
-  LUALIB_API int luaopen_lua_poly2tri (lua_State *L);
+  LUALIB_API int luaopen_poly2tri (lua_State *L);
 }
 
-LUALIB_API int luaopen_lua_poly2tri(lua_State * L) {
+LUALIB_API int luaopen_poly2tri(lua_State * L) {
   lua_newtable(L);
 
   for (int i = 0; thislib[i].name != NULL; ++i)
