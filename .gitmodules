@@ -1,0 +1,3 @@
+[submodule "poly2tri"]
+	path = poly2tri
+	url = https://github.com/TannerRogalsky/poly2tri
