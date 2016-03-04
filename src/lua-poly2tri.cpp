@@ -7,8 +7,8 @@
 
 static int api_triangulate(lua_State *L)
 {
-  std::vector<p2t::Point*> verts;
   size_t vertexcount = lua_objlen(L, 1);
+  std::vector<p2t::Point*> verts;
   verts.reserve(vertexcount / 2);
   lua_pushnil(L);
   while (lua_next(L, 1) != 0) {
@@ -18,11 +18,33 @@ static int api_triangulate(lua_State *L)
     double y = (double) lua_tonumber(L, -1);
     lua_pop(L, 1);
 
-    // printf("%f %f\n", x, y);
     verts.push_back(new p2t::Point(x, y));
   }
 
   p2t::CDT* cdt = new p2t::CDT(verts);
+
+  lua_pushnil(L);
+  while (lua_next(L, 2) != 0) {
+    lua_pushnil(L);
+
+    size_t holevertexcount = lua_objlen(L, -2);
+    std::vector<p2t::Point*> hole;
+    hole.reserve(holevertexcount);
+
+    while (lua_next(L, -2) != 0) {
+      double x = (double) lua_tonumber(L, -1);
+      lua_pop(L, 1);
+      lua_next(L, -2);
+      double y = (double) lua_tonumber(L, -1);
+      lua_pop(L, 1);
+
+      hole.push_back(new p2t::Point(x, y));
+    }
+    cdt->AddHole(hole);
+
+    lua_pop(L, 1);
+  }
+
   cdt->Triangulate();
   std::vector<p2t::Triangle*> tris = cdt->GetTriangles();
   lua_newtable(L);
