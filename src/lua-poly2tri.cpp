@@ -7,12 +7,20 @@
 
 static int api_triangulate(lua_State *L)
 {
-  int args = lua_gettop(L);
-  luaL_check(args >= 6, "need more vertices '%d'", args);
-
   std::vector<p2t::Point*> verts;
-  for (int i = 1; i <= args; i += 2)
-    verts.push_back(new p2t::Point(lua_tonumber(L, i), lua_tonumber(L, i + 1)));
+  size_t vertexcount = lua_objlen(L, 1);
+  verts.reserve(vertexcount / 2);
+  lua_pushnil(L);
+  while (lua_next(L, 1) != 0) {
+    double x = (double) lua_tonumber(L, -1);
+    lua_pop(L, 1);
+    lua_next(L, 1);
+    double y = (double) lua_tonumber(L, -1);
+    lua_pop(L, 1);
+
+    // printf("%f %f\n", x, y);
+    verts.push_back(new p2t::Point(x, y));
+  }
 
   p2t::CDT* cdt = new p2t::CDT(verts);
   cdt->Triangulate();
