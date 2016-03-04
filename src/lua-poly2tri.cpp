@@ -79,7 +79,11 @@ static const struct luaL_Reg thislib[] = {
 };
 
 extern "C" {
+#ifdef _WINDOWS
+  int __declspec(dllexport) luaopen_poly2tri (lua_State *L);
+#else
   LUALIB_API int luaopen_poly2tri (lua_State *L);
+#endif
 }
 
 LUALIB_API int luaopen_poly2tri(lua_State * L) {
