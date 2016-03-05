@@ -24,6 +24,13 @@ local triangles = poly2tri.triangulate(verts, holes)
 
 The output will be a table where each entry is a table consisting of 6 numbers (3 vertices).
 
+# Limitations
+There are limitations based on the underlying poly2tri library.
+
+- If you have a cyclic function that generates random points make sure you don't add the same coordinate twice.
+- Polygons must not self-intersect.
+- Interior holes must not touch other holes, nor touch the polyline boundary.
+
 # Compile
 
 The dependencies for this project are very minimal:
@@ -49,4 +56,51 @@ You also need MSVC installed but you almost certainly already have it.
 mkdir build && cd build
 cmake ..
 cmake --build . --config Release
+```
+
+# Benchmarks
+Benchmarks done using [Nazca Heron](https://github.com/TannerRogalsky/poly2tri/blob/master/testbed/data/nazca_heron.dat) data.
+
+### [Delauney Lua](https://github.com/Yonaba/delaunay)
+```
+> luajit performance/bench.lua
+Test 01: triangulating 1036 points in 240.70 ms
+Test 02: triangulating 1036 points in 232.44 ms
+Test 03: triangulating 1036 points in 228.36 ms
+Test 04: triangulating 1036 points in 222.50 ms
+Test 05: triangulating 1036 points in 241.56 ms
+
+> lua5.1 performance/bench.lua
+Test 01: triangulating 1036 points in 3426.86 ms
+Test 02: triangulating 1036 points in 3445.12 ms
+Test 03: triangulating 1036 points in 3378.10 ms
+Test 04: triangulating 1036 points in 3415.09 ms
+Test 05: triangulating 1036 points in 3438.49 ms
+```
+
+### [love.math.triangulate](https://love2d.org/wiki/love.math.triangulate)
+```
+> love .
+Test 01: triangulating 1036 points in 2.42 ms
+Test 02: triangulating 1036 points in 2.30 ms
+Test 03: triangulating 1036 points in 2.54 ms
+Test 04: triangulating 1036 points in 2.37 ms
+Test 05: triangulating 1036 points in 2.61 ms
+```
+
+### lua-poly2tri
+```
+> lua5.1 performance/bench.lua
+Test 01: triangulating 1036 points in 3.96 ms
+Test 02: triangulating 1036 points in 4.79 ms
+Test 03: triangulating 1036 points in 6.22 ms
+Test 04: triangulating 1036 points in 4.73 ms
+Test 05: triangulating 1036 points in 4.31 ms
+
+> luajit performance/bench.lua
+Test 01: triangulating 1036 points in 2.85 ms
+Test 02: triangulating 1036 points in 3.64 ms
+Test 03: triangulating 1036 points in 3.49 ms
+Test 04: triangulating 1036 points in 5.73 ms
+Test 05: triangulating 1036 points in 3.71 ms
 ```
