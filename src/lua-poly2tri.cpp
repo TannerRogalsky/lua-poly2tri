@@ -58,10 +58,10 @@ static int api_triangulate(lua_State *L) {
 
   cdt->Triangulate();
   std::vector<p2t::Triangle*> tris = cdt->GetTriangles();
-  lua_newtable(L);
+  lua_createtable(L, tris.size(), 0);
   for (size_t i = 0; i < tris.size(); ++i)
   {
-    lua_newtable(L);
+    lua_createtable(L, 6, 0);
 
     lua_pushnumber(L, tris[i]->GetPoint(0)->x);
     lua_rawseti(L, -2, 1);
