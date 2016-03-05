@@ -1,7 +1,7 @@
 lua-poly2tri
 ===
 
-This is a Lua wrapper around [poly2line](http://sites-final.uclouvain.be/mema/Poly2Tri/). It provides fast, stable Constrained Delauney Triangulation of convex or concave polygons with or without holes. It has been tested with Lua 5.1 and LuaJIT but should be able to be built against newer version of Lua as well.
+This is a Lua wrapper around [poly2line](http://sites-final.uclouvain.be/mema/Poly2Tri/). It provides fast, stable Constrained Delauney Triangulation of convex or concave polygons with or without holes. It works with Lua 5.1 and LuaJIT.
 
 This is a continuation and expansion of peete-q's [lua-polygon](https://github.com/peete-q/lua-polygon) work.
 
