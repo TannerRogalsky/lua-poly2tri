@@ -1,0 +1,3 @@
+#define VERSION_MAJOR @lua-poly2tri_VERSION_MAJOR@
+#define VERSION_MINOR @lua-poly2tri_VERSION_MINOR@
+#define AUTHOR "@lua-poly2tri_AUTHOR@"

@@ -3,6 +3,8 @@
 #include "lua.hpp"
 #include "poly2tri.h"
 
+#include "lua-poly2tri.h"
+
 #define luaL_check(c, ...)    if (!(c)) luaL_error(L, __VA_ARGS__)
 
 static int api_triangulate(lua_State *L) {
@@ -105,8 +107,16 @@ LUALIB_API int luaopen_poly2tri(lua_State * L) {
     lua_setfield(L, -2, l.name);
   }
 
-  lua_pushstring(L, "VERSION");
-  lua_pushstring(L, "1.2");
+  lua_pushstring(L, "VERSION_MAJOR");
+  lua_pushnumber(L, VERSION_MAJOR);
+  lua_settable(L, -3);
+
+  lua_pushstring(L, "VERSION_MINOR");
+  lua_pushnumber(L, VERSION_MINOR);
+  lua_settable(L, -3);
+
+  lua_pushstring(L, "AUTHOR");
+  lua_pushstring(L, AUTHOR);
   lua_settable(L, -3);
 
   return 1;
