@@ -35,8 +35,8 @@ There are limitations based on the underlying poly2tri library.
 
 The dependencies for this project are very minimal:
 
-- Lua 5.1
 - CMake >= 2.8
+- MSVC on Windows
 
 Then clone this project and it's submodule. `git submodule update --init --recursive`
 
@@ -50,7 +50,6 @@ make
 
 ### Windows
 Use Powershell or your favourite terminal emulator.
-You also need MSVC installed but you almost certainly already have it.
 
 ```bash
 mkdir build && cd build
