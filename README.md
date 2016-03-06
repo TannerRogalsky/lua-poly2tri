@@ -31,6 +31,8 @@ There are limitations based on the underlying poly2tri library.
 - Polygons must not self-intersect.
 - Interior holes must not touch other holes, nor touch the polyline boundary.
 
+It might be useful to clean up your polygon data using something like [clipper](https://luapower.com/clipper).
+
 # Compile
 
 The dependencies for this project are very minimal:
