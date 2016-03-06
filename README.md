@@ -8,6 +8,7 @@ This is a continuation and expansion of peete-q's [lua-polygon](https://github.c
 # Usage
 
 Download or compile the appropriate binary for your system.
+Binaries: https://github.com/TannerRogalsky/lua-poly2tri/releases
 
 ```Lua
 -- require the module
